@@ -10,3 +10,23 @@ The challenger (LightGBM) replaces the champion (ETS) only if ALL of these hold:
 
 The champion must also beat the naive baseline on average MAPE to be kept at all.
 Otherwise the naive model is the benchmark we have failed to beat, and that is reported.
+
+## Backtest results and decision
+
+Windows: 83  (first origin 2004-12-01, last 2025-06-01)
+
+Average scorecard (all windows):
+                     rmse  mape
+model                          
+challenger_lgbm  35656.73  2.90
+champion_ets     26936.16  2.25
+naive            36606.74  3.14 
+
+Challenger beats champion in 37% of windows
+
+Stress periods only:
+                     rmse  mape
+model                          
+challenger_lgbm  52708.90  4.50
+champion_ets     44743.38  3.82
+naive            45533.80  4.10
