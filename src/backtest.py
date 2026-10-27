@@ -28,3 +28,12 @@ def rolling_backtest(df, models: dict, horizon=12, min_train=180, step=3) -> pd.
                 "mape": mape(actual, pred),
             })
     return pd.DataFrame(rows)
+
+def horizon_errors(df, model_fn, horizon=12, min_train=180, step=3) -> np.ndarray:
+    """Log error for each forecast month, one row per backtest window."""
+    rows = []
+    for end in range(min_train, len(df) - horizon + 1, step):
+        actual = df["REVOLSL"].iloc[end:end + horizon].to_numpy()
+        pred = model_fn(df.iloc[:end], horizon)
+        rows.append(np.log(actual / pred))
+    return np.array(rows)  # shape: (windows, horizon)
