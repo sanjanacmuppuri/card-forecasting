@@ -29,7 +29,6 @@ def make_features(df: pd.DataFrame) -> pd.DataFrame:
     X["month"] = df.index.month
     return X
 
-
 def lgbm_forecast(train: pd.DataFrame, horizon: int) -> np.ndarray:
     """Challenger: one gradient boosting model per forecast month."""
     X = make_features(train)
